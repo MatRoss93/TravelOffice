@@ -6,9 +6,23 @@ public class Customer {
     private Address address;
     private Trip trip;
 
+    public Customer() {
+
+    }
     public Customer(String name) {
         this.name = name;
 
+    }
+
+    public Customer(String name, Address address) {
+        this.name=name;
+        this.address = address;
+        this.trip = null;
+    }
+    public Customer(String name, Address address, Trip trip) {
+        this.name = name;
+        this.address = address;
+        this.trip = trip;
     }
 
     public void setAddress(Address address) {
@@ -16,7 +30,20 @@ public class Customer {
     }
 
     public void setTrip(Trip trip) {
+
         this.trip = trip;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public Trip getTrip() {
+        return trip;
     }
 
     @Override
