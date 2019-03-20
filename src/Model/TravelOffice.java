@@ -20,6 +20,14 @@ public class TravelOffice {
         return trips;
     }
 
+    public static Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public static void setCustomers(Set<Customer> customers) {
+        TravelOffice.customers = customers;
+    }
+
     public void showTrips() {
 
         System.out.print(trips.keySet() + " ");
@@ -57,7 +65,8 @@ public class TravelOffice {
         }
         return false;
     }
-    /*
+    /* ---- Element wykorzystywany w poprzedniej wersji ćwiczenia, ----
+            ---- w której używano tablicy zamiast Collections ----
     public void addCustomer(Customer customer) {
 
         if(isFull()) {

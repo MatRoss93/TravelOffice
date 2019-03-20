@@ -61,11 +61,25 @@ public class MainHandler implements UserInterface{
         showTrips();
         String[] dane = new String[2];
 
-        System.out.println("Przypisanie wycieczki do klienta o nazwisku: ");
+        System.out.println("\nPrzypisanie wycieczki do klienta o nazwisku: ");
         dane[0] = s.next();
+
+        if(!TravelOffice.getCustomers().contains(dane[0])) {
+            System.out.println("Nie ma takiego klienta w bazie. Podaj nazwisko klienta z bazy [K] lub" +
+                    "dodaj klienta do bazy [N]: ");
+            String action = s.next().toUpperCase();
+            if(action.equals("K")) {
+                System.out.println("Podaj nazwisko klienta: ");
+                dane[0] = s.next();
+            }
+            else
+                addCustomer();
+        }
         System.out.println("Kierunek wycieczki: ");
         dane[1] = s.next();
-
+        if(!TravelOffice.getTrips().containsKey(dane[1])) {
+            System.out.println("Biuro nie oferuje wycieczki w podane miejsce. Dodaj wycieczkę [N] lub przypisz inną [K]:");
+        }
         office.findCustomerByName(dane[0]).setTrip(TravelOffice.getTrips().get(dane[1]));
     }
 

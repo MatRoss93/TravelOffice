@@ -21,19 +21,7 @@ public class Test {
         office.addCustomer(new Customer("Hadim", new Address("Prosta", "44-100", "Egipt"),
                 new AboardTrip(new Date(2019,10,10), new Date(2019,11,11),
                         "Egipt", 1000, 100)));
-        /*
-        System.out.println("Liczba klientów: " + office.getCustomerCount());
-        office.getInfo();
-        System.out.println("Wyszukiwanie klienta: ");
-        try {
-            System.out.println(office.findCustomerByName("Tali").toString());
-        } catch (NullPointerException e) {
-            System.out.println("Nie ma takiego klienta");
-        }
-        System.out.println("Usuwanie klienta: ");
-        System.out.println(office.removeCustomer(office.findCustomerByName("Tali")));
-        office.getInfo();
-        */
+        
         System.out.println("Co zrobić: \n" +
                 "1. Dodaj klienta \n" +
                 "2. Dodaj wycieczkę \n" +
@@ -67,8 +55,10 @@ public class Test {
                     break;
                 case 6:
                     mh.removeCustomer();
+                    break;
                 case 7:
                     mh.removeTrip();
+                    break;
                 case 9:
                     office.getInfo();
                     break;
@@ -93,6 +83,5 @@ public class Test {
 
         }
         sc.close();
-
     }
 }
