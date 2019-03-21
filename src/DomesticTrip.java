@@ -1,4 +1,4 @@
-package Model;
+import java.time.LocalDate;
 
 public class DomesticTrip extends Trip {
 
@@ -8,12 +8,12 @@ public class DomesticTrip extends Trip {
         this.ownArrivalDiscount = ownArrivalDiscount;
     }
 
-    public DomesticTrip(Date start, Date end, String descr, double price, double ownArrivalDiscount) {
+    public DomesticTrip(LocalDate start, LocalDate end, String descr, double price, double ownArrivalDiscount) {
         super(start, end, descr, price);
         this.ownArrivalDiscount = ownArrivalDiscount;
     }
 
-    public DomesticTrip(Date start, Date end, String descr, double price) {
+    public DomesticTrip(LocalDate start, LocalDate end, String descr, double price) {
         super(start, end, descr, price);
         this.ownArrivalDiscount = 0;
     }

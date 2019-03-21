@@ -1,14 +1,32 @@
-import Model.*;
-
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class Test {
 
+    public static Logger logger = Logger.getLogger("src");
+    public static FileHandler fh;
+
+    static {
+        try {
+            fh = new FileHandler("log.txt");
+            fh.setFormatter(new SimpleFormatter());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String... args) {
+
+        logger.setUseParentHandlers(false);
+        logger.addHandler(fh);
         TravelOffice office = new TravelOffice();
         MainHandler mh = new MainHandler();
 
 
+        /*
         office.addTrip("Kalkuta",new DomesticTrip(new Date(2018,10,20), new Date(2018, 10,30),"Kalkuta",0));
         office.addCustomer(new Customer("John", new Address("Prosta", "44-100", "Kosowo"),
                 new DomesticTrip(new Date(2019,10,10), new Date(2019,11,11),
@@ -17,9 +35,9 @@ public class Test {
         office.addCustomer(new Customer("Widia", new Address("Bliat", "44-110", "Czelabiańsk"),
                 new DomesticTrip(new Date(2019,10,10), new Date(2019,11,11),
                         "Polska",1500, 100)));
-
+        */
         office.addCustomer(new Customer("Hadim", new Address("Prosta", "44-100", "Egipt"),
-                new AboardTrip(new Date(2019,10,10), new Date(2019,11,11),
+                new AboardTrip(LocalDate.of(2019,10,10), LocalDate.of(2019,11,11),
                         "Egipt", 1000, 100)));
         
         System.out.println("Co zrobić: \n" +

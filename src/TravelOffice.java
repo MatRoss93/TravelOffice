@@ -1,5 +1,3 @@
-package Model;
-
 import java.util.*;
 
 public class TravelOffice {
@@ -16,7 +14,7 @@ public class TravelOffice {
         }
     }
 
-    public static Map<String, Trip> getTrips() {
+    public static Map<String, Trip> getTrips() throws NoSuchTripException {
         return trips;
     }
 
@@ -41,30 +39,33 @@ public class TravelOffice {
         trips.put(destination, trip);
     }
 
-    public boolean removeTrip(String destination) {
+    public boolean removeTrip(String destination) throws NoSuchTripException {
         if(trips.containsKey(destination)) {
             trips.remove(destination);
             return true;
         }
-        return false;
+        throw new NoSuchTripException(destination);
     }
 
-    public Customer findCustomerByName(String name) throws NullPointerException {
+    public Customer findCustomerByName(String name) throws NoSuchCustomerException {
 
         for(Customer c: customers) {
             if(c.getName().equals(name))
                 return c;
             }
-        return null;
+        throw new NoSuchCustomerException(name);
     }
 
-    public boolean removeCustomer(Customer customer) {
+    /*
+    public boolean removeCustomer(Customer customer) throws NoSuchCustomerException{
+        rci.customerToRemove(customer, name);
         if(customers.contains(customer)) {
             customers.remove(customer);
             return true;
         }
-        return false;
+        throw new NoSuchCustomerException(customer.getName());
     }
+    */
     /* ---- Element wykorzystywany w poprzedniej wersji ćwiczenia, ----
             ---- w której używano tablicy zamiast Collections ----
     public void addCustomer(Customer customer) {

@@ -1,15 +1,15 @@
-package Model;
+import java.time.LocalDate;
 
 public class AboardTrip extends Trip {
 
     private double insurance;
 
-    public AboardTrip(Date start, Date end, String descr, double price, double insurance) {
+    public AboardTrip(LocalDate start, LocalDate end, String descr, double price, double insurance) {
         super(start, end, descr, price);
         this.insurance = insurance;
     }
 
-    public AboardTrip(Date start, Date end, String descr, double price) {
+    public AboardTrip(LocalDate start, LocalDate end, String descr, double price) {
         super(start, end, descr, price);
         this.insurance = 0;
     }

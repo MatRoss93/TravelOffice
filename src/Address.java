@@ -1,5 +1,3 @@
-package Model;
-
 public class Address {
 
     private String street;
