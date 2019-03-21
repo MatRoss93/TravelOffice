@@ -3,10 +3,7 @@ import java.time.LocalDate;
 public abstract class Trip {
     private static int id = 0;
     private int idWycieczki;
-    /*
-    private Date tripStartLocalDate;
-    private Date tripEndLocalDate;
-    */
+
     private String destination;
     private LocalDate tripStartLocalDate;
     private LocalDate tripEndLocalDate;

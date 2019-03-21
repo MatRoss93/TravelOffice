@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ public class MainHandler implements UserInterface{
     private TravelOffice office;
     private Scanner s = null;
     DateTimeFormatter drf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     public MainHandler() {
         this.office = new TravelOffice();
         s = new Scanner(System.in);
@@ -51,15 +53,18 @@ public class MainHandler implements UserInterface{
         dane[3] = s.next();
         System.out.println("Z / K: ");
         dane[4] = s.next();
-
-        if(dane[4].equals("Z")) {
-            trip = new AboardTrip(LocalDate.parse(dane[0],drf), LocalDate.parse(dane[1],drf), dane[2], Double.parseDouble(dane[3]));
+        try {
+            if (dane[4].equals("Z")) {
+                trip = new AboardTrip(LocalDate.parse(dane[0], drf), LocalDate.parse(dane[1], drf), dane[2], Double.parseDouble(dane[3]));
+            } else {
+                trip = new DomesticTrip(LocalDate.parse(dane[0], drf), LocalDate.parse(dane[1], drf), dane[2], Double.parseDouble(dane[3]));
+            }
+            office.addTrip(dane[2], trip);
+            return trip;
+        } catch(DateTimeParseException e) {
+            logger.severe("Format daty inny niż yyyy-MM-dd lub przekroczony zakres dla jednego lub więcej pól");
+            return null;
         }
-        else {
-            trip = new DomesticTrip(LocalDate.parse(dane[0],drf), LocalDate.parse(dane[1],drf), dane[2], Double.parseDouble(dane[3]));
-        }
-        office.addTrip(dane[2], trip);
-        return trip;
     }
 
     @Override
@@ -79,8 +84,8 @@ public class MainHandler implements UserInterface{
         } catch (NoSuchCustomerException e) {
             logger.warning(e.toString());
             System.out.println(e.toString());
-            //addCustomer();
-        } catch (NoSuchTripException e) {
+            addCustomer();
+        } catch (Exception e) {
             System.out.println(e.toString());
             addTrip();
         }
@@ -130,11 +135,8 @@ public class MainHandler implements UserInterface{
     @Override
     public void showTrips() {
         //office.showTrips();
-        try {
-            TravelOffice.getTrips().values().forEach(y -> System.out.println(y));
-        } catch (NoSuchTripException e) {
-            System.out.println(e.toString());
-        }
+        TravelOffice.getTrips().values().forEach(y -> System.out.println(y));
+
     }
 
     @Override

@@ -14,7 +14,7 @@ public class TravelOffice {
         }
     }
 
-    public static Map<String, Trip> getTrips() throws NoSuchTripException {
+    public static Map<String, Trip> getTrips() {
         return trips;
     }
 

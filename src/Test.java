@@ -24,18 +24,8 @@ public class Test {
         logger.addHandler(fh);
         TravelOffice office = new TravelOffice();
         MainHandler mh = new MainHandler();
-
-
-        /*
-        office.addTrip("Kalkuta",new DomesticTrip(new Date(2018,10,20), new Date(2018, 10,30),"Kalkuta",0));
-        office.addCustomer(new Customer("John", new Address("Prosta", "44-100", "Kosowo"),
-                new DomesticTrip(new Date(2019,10,10), new Date(2019,11,11),
-                        "Egipt", 10)));
-
-        office.addCustomer(new Customer("Widia", new Address("Bliat", "44-110", "Czelabiańsk"),
-                new DomesticTrip(new Date(2019,10,10), new Date(2019,11,11),
-                        "Polska",1500, 100)));
-        */
+        String[] str = {"abcd"};
+        System.out.println(str[0].substring(0,1).toUpperCase()+str[0].substring(1));
         office.addCustomer(new Customer("Hadim", new Address("Prosta", "44-100", "Egipt"),
                 new AboardTrip(LocalDate.of(2019,10,10), LocalDate.of(2019,11,11),
                         "Egipt", 1000, 100)));
