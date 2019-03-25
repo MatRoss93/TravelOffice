@@ -4,6 +4,7 @@ public class AboardTrip extends Trip {
 
     private double insurance;
 
+    @SuppressWarnings("unused")
     public AboardTrip(LocalDate start, LocalDate end, String descr, double price, double insurance) {
         super(start, end, descr, price);
         this.insurance = insurance;
@@ -17,7 +18,7 @@ public class AboardTrip extends Trip {
     public double getInsurance() {
         return insurance;
     }
-
+    @SuppressWarnings("unused")
     public void setInsurance(double insurance) {
         this.insurance = insurance;
     }

@@ -4,10 +4,6 @@ public class DomesticTrip extends Trip {
 
     private double ownArrivalDiscount;
 
-    public DomesticTrip(double ownArrivalDiscount) {
-        this.ownArrivalDiscount = ownArrivalDiscount;
-    }
-
     public DomesticTrip(LocalDate start, LocalDate end, String descr, double price, double ownArrivalDiscount) {
         super(start, end, descr, price);
         this.ownArrivalDiscount = ownArrivalDiscount;
@@ -22,6 +18,7 @@ public class DomesticTrip extends Trip {
     public double getPrice() {
         return super.getPrice() - getOwnArrivalDiscount();
     }
+
     public double getOwnArrivalDiscount() {
         return ownArrivalDiscount;
     }

@@ -15,7 +15,7 @@ public abstract class Trip {
     public Trip(LocalDate start, LocalDate end, String descr) {
         this.tripStartLocalDate = start;
         this.tripEndLocalDate = end;
-        this.destination = descr;
+        this.destination = descr.substring(0,1).toUpperCase() + descr.substring(1).toLowerCase();
     }
 
     public Trip(LocalDate start, LocalDate end, String descr, double price) {
@@ -76,8 +76,8 @@ public abstract class Trip {
         return "Trip{" +
                 "idWycieczki=" + idWycieczki +
                 ", destination='" + destination + '\'' +
-                ", tripStartLocalDate=" + tripStartLocalDate +
-                ", tripEndLocalDate=" + tripEndLocalDate +
+                ", trip Start Date=" + tripStartLocalDate +
+                ", trip End Date=" + tripEndLocalDate +
                 ", price=" + price +
                 '}';
     }

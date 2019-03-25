@@ -1,28 +1,30 @@
 public class Customer {
 
     private String name;
+    private String surname;
     private Address address;
     private Trip trip;
 
+    @SuppressWarnings("unused")
     public Customer() {
 
     }
-    public Customer(String name) {
+
+    Customer(String name, String surname, Address address) {
         this.name = name;
-
-    }
-
-    public Customer(String name, Address address) {
-        this.name=name;
+        this.surname = surname;
         this.address = address;
         this.trip = null;
     }
+
+    @SuppressWarnings("unused")
     public Customer(String name, Address address, Trip trip) {
         this.name = name;
         this.address = address;
         this.trip = trip;
     }
 
+    @SuppressWarnings("unused")
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -32,16 +34,8 @@ public class Customer {
         this.trip = trip;
     }
 
-    public String getName() {
+    String getName() {
         return name;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public Trip getTrip() {
-        return trip;
     }
 
     @Override

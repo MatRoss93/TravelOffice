@@ -7,64 +7,58 @@ import java.util.logging.Logger;
 
 public class MainHandler implements UserInterface{
 
-    private static Logger logger = Logger.getLogger("src");
+
 
     private TravelOffice office;
-    private Scanner s = null;
-    DateTimeFormatter drf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private TravelOfficeService officeService;
+    private Scanner s;
+
 
     public MainHandler() {
         this.office = new TravelOffice();
+        this.officeService = new TravelOfficeService();
         s = new Scanner(System.in);
     }
 
     @Override
     public Customer addCustomer() {
-        logger.info("Dodaję klienta");
-        String[] dane = new String[4];
 
-        System.out.println("Nazwisko klienta: ");
-        dane[0] = s.next();
-        System.out.println("Nazwa ulicy: ");
-        dane[1] = s.next();
-        System.out.println("Kod pocztowy (??-???):");
-        dane[2] = s.next();
-        System.out.println("Miasto: ");
+        String[] dane = new String[5];
+        System.out.println("Name: ");
+        dane[0] = s.next().toUpperCase();
+        System.out.println("Surname: ");
+        dane[1] = s.next().toUpperCase();
+        System.out.println("Street: ");
+        dane[2] = s.next().toUpperCase();
+        System.out.println("Post code (??-???):");
         dane[3] = s.next();
-        Customer customer = new Customer(dane[0], new Address(dane[1],dane[2], dane[3]));
-        office.addCustomer(customer);
+        System.out.println("City: ");
+        dane[4] = s.next().toUpperCase();
+        Customer customer = new Customer(dane[0], dane[1], new Address(dane[2],dane[3], dane[4]));
+        officeService.addCustomer(customer);
 
         return customer;
     }
 
     @Override
     public Trip addTrip() {
-        logger.info("Dodaję wycieczkę");
-        Trip trip = null;
+
         String[] dane = new String[5];
 
-        System.out.println("Data wyjazdu: ");
+        System.out.println("Date of departue: ");
         dane[0] = s.next();
-        System.out.println("Data powrotu: ");
+        System.out.println("Date of return: ");
         dane[1] = s.next();
-        System.out.println("Gdzie: ");
-        dane[2] = s.next();
-        System.out.println("Cena: ");
+        System.out.println("Destination: ");
+        dane[2] = s.next().toUpperCase();
+        System.out.println("Price: ");
         dane[3] = s.next();
-        System.out.println("Z / K: ");
-        dane[4] = s.next();
-        try {
-            if (dane[4].equals("Z")) {
-                trip = new AboardTrip(LocalDate.parse(dane[0], drf), LocalDate.parse(dane[1], drf), dane[2], Double.parseDouble(dane[3]));
-            } else {
-                trip = new DomesticTrip(LocalDate.parse(dane[0], drf), LocalDate.parse(dane[1], drf), dane[2], Double.parseDouble(dane[3]));
-            }
-            office.addTrip(dane[2], trip);
-            return trip;
-        } catch(DateTimeParseException e) {
-            logger.severe("Format daty inny niż yyyy-MM-dd lub przekroczony zakres dla jednego lub więcej pól");
-            return null;
-        }
+        System.out.println("A / D: ");
+        dane[4] = s.next().toUpperCase();
+
+        officeService.addTrip(dane);
+
+        return null;
     }
 
     @Override
@@ -77,71 +71,34 @@ public class MainHandler implements UserInterface{
         dane[0] = s.next();
 
         System.out.println("Kierunek wycieczki: ");
-        dane[1] = s.next();
+        dane[1] = s.next().toUpperCase();
 
-        try {
-            office.findCustomerByName(dane[0]).setTrip(TravelOffice.getTrips().get(dane[1]));
-        } catch (NoSuchCustomerException e) {
-            logger.warning(e.toString());
-            System.out.println(e.toString());
-            addCustomer();
-        } catch (Exception e) {
-            System.out.println(e.toString());
-            addTrip();
-        }
+        officeService.assign(dane);
     }
 
     @Override
     public boolean removeCustomer() {
-
         System.out.println("Likwidacja klienta o nazwisku: ");
         String name = s.next();
-
-        if(TravelOffice.getCustomers().removeIf(x -> (x.getName().equals(name))))
-            return true;
-        else {
-            System.out.println("Nie ma takiego klienta");
-            return false;
-        }
-
+        return officeService.removeCustomer(name);
     }
-    /*
-    @Override
-    public boolean removeCustomer() {
 
-        System.out.println("Likwidacja klienta o nazwisku: ");
-        String name = s.next();
-        try {
-            return office.removeCustomer(office.findCustomerByName(name));
-        } catch(NoSuchCustomerException e) {
-            System.out.println(e.toString());
-            return false;
-        }
-    }
-    */
     @Override
     public boolean removeTrip() {
 
         System.out.println("Likwidacja wycieczki do miejsca: ");
         String dest = s.next();
-        try {
-            return office.removeTrip(dest);
-        } catch(NoSuchTripException e) {
-            System.out.println(e.toString());
-            return false;
-        }
+
+        return officeService.removeTrip(dest);
     }
 
     @Override
     public void showTrips() {
-        //office.showTrips();
-        TravelOffice.getTrips().values().forEach(y -> System.out.println(y));
-
+        officeService.showTrips();
     }
 
     @Override
     public void showCustomers() {
-        TravelOffice.getCustomers().forEach(x-> System.out.println(x.toString()));
-        //office.showCustomers();
+        officeService.showCustomers();
     }
 }

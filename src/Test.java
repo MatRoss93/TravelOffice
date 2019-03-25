@@ -26,9 +26,6 @@ public class Test {
         MainHandler mh = new MainHandler();
         String[] str = {"abcd"};
         System.out.println(str[0].substring(0,1).toUpperCase()+str[0].substring(1));
-        office.addCustomer(new Customer("Hadim", new Address("Prosta", "44-100", "Egipt"),
-                new AboardTrip(LocalDate.of(2019,10,10), LocalDate.of(2019,11,11),
-                        "Egipt", 1000, 100)));
         
         System.out.println("Co zrobić: \n" +
                 "1. Dodaj klienta \n" +
